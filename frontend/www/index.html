@@ -45,7 +45,9 @@
                       <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;">
                       
                         <input type="text" name="hotelDestino" id="hotelDestino" class="form-control typeahead" placeholder="cidade ou hotel" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top; background-color: transparent;">
-                        
+                        <!-- save the selected hotel id -->  
+                        <input type="hidden" id="selectedHotel" name="selectedHotel">
+
                       </span>
                     </div>
                   </div>
@@ -73,7 +75,7 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                           <div class="form-group">
                             <label class="no-date">
-                              <input type="checkbox" id="no-date" name="nodate"> Ainda não defini as datas
+                              <input type="checkbox" id="nodate" name="nodate"> Ainda não defini as datas
                             </label>
                           </div>
                         </div>
@@ -110,7 +112,7 @@
     <script src="lib/moment/min/moment.min.js"></script>
     <script src="lib/pikaday/pikaday.js"></script>
     <script src="lib/pikaday/pikaday.jquery.js"></script>
-
+    <script src="lib/handlebars/handlebars.min.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>

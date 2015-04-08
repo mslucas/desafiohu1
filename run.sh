@@ -9,5 +9,5 @@ node backend/api-server.js
 
 # just a simple web server to show frontend working
 echo "\n>>>Starting frontend application...<<<"
-node frontend/node_modules/.bin/http-server ./frontend/www/ -p 12345 -o --cors 
+node frontend/node_modules/.bin/http-server ./frontend/www/ -p 12345 --cors -s #-o
 

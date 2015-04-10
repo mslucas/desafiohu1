@@ -1,0 +1,75 @@
+<div class="container" ng-controller="hotelSearchCtrl">
+
+    <div class="col-sm-6 p-rel">
+
+    <div class="panel buscaspanel buscaspanel--hotel">
+      <div class="panel-heading">
+        <h1 class="h1">
+          <i class="icon-hoteis"></i> Hotéis <a href="#" class="close-button"><i class="hu-icons"></i></a>
+        </h1>
+      </div>
+      <div class="panel-body">
+        <p class="slogan hidden-xs"><strong>+ 170.000</strong> hotéis, pousadas e resorts no mundo todo.</p>
+        <form name="frmSearch" id="frmSearch" class="form-busca-hotel">
+          <div class="row">
+            <div class="col-md-5 col-sm-12">
+              <label for="hotelDestino">Quer ficar onde?</label>
+              <div class="form-group">
+                <div id="hoteis">
+                  <i class="icon-location2"></i>
+                  <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;">
+                  
+                    <input type="text" name="destinyName" id="destinyName" class="form-control typeahead" placeholder="cidade ou hotel" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top; background-color: transparent;">
+                    <!-- save the selected hotel type/id -->  
+                    <input type="hidden" id="destinyType" name="destinyType">
+                    <input type="hidden" id="destinyId" name="destinyId">
+                    
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-7 col-sm-12 col-xs-12 hidden-content-sm">
+
+              <label for="hotelDataIdaVolta">Quando? <small>(Entrada e Saída)</small></label>
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="row date-inputs">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                      <div class="form-group">
+                        <input type="text" id="hotelDataIda" class="form-control daterange" placeholder="entrada" name="checkin" readonly="readonly">
+                        <i class="icon-calendar2"></i>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                      <div class="form-group">
+                        <input type="text" id="hotelDataVolta" class="form-control daterange" placeholder="saída" name="checkout" readonly="readonly">
+                        <i class="icon-calendar2"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="form-group">
+                        <label class="no-date">
+                          <input type="checkbox" id="nodate" name="nodate"> Ainda não defini as datas
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <p class="text-center btn-search-container">
+      <button type="submit" class="btn btn-orange" id="btn-search-hotel">
+        <i class="icon-search"></i> Buscar
+      </button>
+    </p>
+  </form>
+</div>
+</div>
+
+</div><!-- FIM COL 6 -->
+
+</div> <!-- /container -->

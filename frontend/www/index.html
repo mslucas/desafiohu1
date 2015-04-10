@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html ng-app="hotelSearch">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,102 +9,11 @@
     <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/widget.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
-  </head>
-  <body>
+    <link href="css/animation.css" rel="stylesheet">
 
-    <!-- static navbar -->
-    <nav class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#" title="Desafio #1 :: Hotel Urbano">
-            <img class="img-responsive" src="img/hu-logo.png" rel="Desafio #1 :: Hotel Urbano">
-          </a>
-        </div>  
-      </div>
-    </nav>
-
-    <div class="container">
-        
-        <div class="col-sm-6 p-rel">
-
-        <div class="panel buscaspanel buscaspanel--hotel">
-          <div class="panel-heading">
-            <h1 class="h1">
-              <i class="icon-hoteis"></i> Hotéis <a href="#" class="close-button"><i class="hu-icons"></i></a>
-            </h1>
-          </div>
-          <div class="panel-body">
-            <p class="slogan hidden-xs"><strong>+ 170.000</strong> hotéis, pousadas e resorts no mundo todo.</p>
-            <form action="#" method="GET" class="form-busca-hotel">
-              <div class="row">
-                <div class="col-md-5 col-sm-12">
-                  <label for="hotelDestino">Quer ficar onde?</label>
-                  <div class="form-group">
-                    <div id="hoteis">
-                      <i class="icon-location2"></i>
-                      <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;">
-                      
-                        <input type="text" name="hotelDestino" id="hotelDestino" class="form-control typeahead" placeholder="cidade ou hotel" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top; background-color: transparent;">
-                        <!-- save the selected hotel id -->  
-                        <input type="hidden" id="selectedHotel" name="selectedHotel">
-
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-7 col-sm-12 col-xs-12 hidden-content-sm">
-
-                  <label for="hotelDataIdaVolta">Quando? <small>(Entrada e Saída)</small></label>
-                  <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                      <div class="row date-inputs">
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                          <div class="form-group">
-                            <input type="text" id="hotelDataIda" class="form-control daterange" placeholder="entrada" name="checkin" readonly="readonly">
-                            <i class="icon-calendar2"></i>
-                          </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                          <div class="form-group">
-                            <input type="text" id="hotelDataVolta" class="form-control daterange" placeholder="saída" name="checkout" readonly="readonly">
-                            <i class="icon-calendar2"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                          <div class="form-group">
-                            <label class="no-date">
-                              <input type="checkbox" id="nodate" name="nodate"> Ainda não defini as datas
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <p class="text-center btn-search-container">
-          <button type="submit" class="btn btn-orange" id="btn-search-hotel">
-            <i class="icon-search"></i> Buscar
-          </button>
-        </p>
-      </form>
-    </div>
-    </div>
-
-    </div><!-- FIM COL 6 -->
-
-    </div> <!-- /container -->
-
-    <footer class="footer">
-      <div class="container">
-        <p class="text-muted credit">developed by <a href="http://github.com/mslucas" target="_blank">@mslucas</a></p>
-      </div>
-    </footer>
-
-    <!-- SCRIPTS -->
+    <!-- app libs -->
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="lib/jquery/dist/jquery.min.js"></script>
     <script src="lib/typeahead/dist/typeahead.bundle.min.js"></script>
     <script src="lib/typeahead/dist/typeahead.jquery.min.js"></script>
@@ -113,6 +22,24 @@
     <script src="lib/pikaday/pikaday.js"></script>
     <script src="lib/pikaday/pikaday.jquery.js"></script>
     <script src="lib/handlebars/handlebars.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="lib/jquery-serializeObject.min.js"></script>
+    
+    <!-- app scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
+  
+  </head>
+  <body ng-controller="MainCtrl">
+
+    <!-- include header -->
+    <div ng-include="'views/header.html'"></div>
+        
+    <!-- include page content -->
+    <div class="slide-animate" ng-include="template.url"></div>
+
+    <!-- include footer -->
+    <div ng-include="'views/footer.html'"></div>
+
   </body>
 </html>

@@ -144,31 +144,7 @@ angular.module("hotelSearch")
 
   $scope.goSearch = function(params){
     console.log(params);
-    //hotelDestino: "Grand Blue Sky International ", 
-    //selectedHotel: "417", 
-    //checkin: "17/04/2015", 
-    //checkout: "25/04/2015"
 
   }
 
 }); //end widget ctrl
-
-/*
-  $scope.nome = HotelSearchService.getRestauranteName();
-  $scope.cardapio = HotelSearchService.getCardapio();
-  $scope.predicate = '-name';
-    
-  $scope.addToCart = function(produto) {
-      HotelSearchService.addToPedido(produto);
-      $scope.pedido = HotelSearchService.getPedido();
-      $scope.valorTotal = HotelSearchService.getValorTotal();
-  }
-  
-  $scope.remFromCart = function(produto) {
-      HotelSearchService.remFromPedido(produto);
-      $scope.valorTotal = HotelSearchService.getValorTotal();
-  }
-  
-  $scope.showDetails = function(produto) {
-      produto.showDetails = !produto.showDetails;
-  }*/

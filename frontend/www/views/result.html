@@ -1,1 +1,29 @@
-<h3>lista hoteis</h3>
+<div class="container" ng-controller="hotelSearchCtrl">
+<h3>Resultado da Busca</h3>
+<hr />
+
+<button class="btn btn-orange" ng-click="goNewSearch()">nova busca</button>
+
+<p ng-if="searchResult.length">Encontramos {{searchResult.length}} locais!</p>
+
+<table class="table table-hover">
+<thead>
+    <tr>
+      <th></th>
+      <th><span class="label label-default" ng-click="predicate = 'name'; reverse=!reverse">Nome</span></th>
+      <th><span class="label label-default" ng-click="predicate = 'value'; reverse=!reverse">Preço</span></th>
+      <th></th>
+	</tr>
+</thead>
+<tbody>
+    <tr ng-model="searchResult" ng-repeat="item in searchResult  | orderBy:predicate:reverse">
+      <td><img ng-if="item.img" ng-src="{{item.img}}" width="40" height="40" /></td>
+      <td>{{item.name}}</td>
+      <td>{{item.value | currency}}</td>
+      <td><button class="btn btn-orange" ng-click="buyThis(item)">Comprar</button>
+    </tr>
+</tbody>
+</table>
+
+
+</div> <!-- END CONTAINER -->

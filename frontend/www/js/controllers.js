@@ -1,24 +1,34 @@
 angular.module("hotelSearch")
+
 //main app controller
 .controller("MainCtrl", function($scope, HotelSearchService) {
-  
+
   $scope.templates = [ 
         { name: 'main', url: 'views/main.html'},
         { name: 'result', url: 'views/result.html'} ];
       
   $scope.template = $scope.templates[0];
 
-  //onload
-  /*angular.element(document).ready(function () {
-            
-  });*/
+  $scope.showResultView = function(result){
+    $scope.template = $scope.templates[1];
+    $scope.searchResult = result;
+    $scope.$apply();
+  }
+
+  $scope.showMainView = function(){
+    $scope.template = $scope.templates[0];
+    //$scope.$apply();
+  }
 
 })
 
 //search widget controller
 .controller("hotelSearchCtrl", function($scope, HotelSearchService) {
 
+  //$scope.searchResult = []; //resultados da busca
+
   angular.element(document).ready(function () {
+
     $scope.loadAutoComplete();
     $scope.changeNoDate();
     $scope.loadDatePickers();
@@ -31,25 +41,28 @@ angular.module("hotelSearch")
   });
 
   $scope.loadAutoComplete = function(){
-
+     
+    var places = new Bloodhound({
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('cidade'),
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      local: [],
+      limit: 10,
+      prefetch: 'http://127.0.0.1:8000/v1/getPreFetchedPlaces',
+      /*remote: 'http://127.0.0.1:8000/v1/getPlace?q=%QUERY'*/
+    });
+    
     var hotels = new Bloodhound({
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('hotel'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       local: [],
       limit: 10,
-      prefetch: 'http://127.0.0.1:8000/v1/getprefetchedplaces',
-      /*remote: 'http://127.0.0.1:8000/v1/gethotel?q=%QUERY'*/
+      prefetch: 'http://127.0.0.1:8000/v1/getPreFetchedHotels',
+      /*remote: 'http://127.0.0.1:8000/v1/getHotel?q=%QUERY'*/
     });
-    /* 
-    var cities = new Bloodhound({
-      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('team'),
-      queryTokenizer: Bloodhound.tokenizers.whitespace,
-      prefetch: '../data/nhl.json'
-    });*/
-   
+    
+    places.initialize();
     hotels.initialize();
-    //cities.initialize();
-     
+    
     $('.typeahead').typeahead({
       hint: false,
       highlight: false,
@@ -62,29 +75,29 @@ angular.module("hotelSearch")
       templates: {
         empty: [
           '<div class="empty-message">',
-          'Nenhum resultado encontrado!',
-          '</div>'
-        ].join('\n'),
-        suggestion: Handlebars.compile('<p class="icon-suitcase">&nbsp;<strong>{{hotel}}</strong> – {{cidade}}</p>')
-      }
-    }/*,
-    {
-      name: 'cities',
-      displayKey: 'city',
-      source: cities.ttAdapter(),
-      templates: {
-        empty: [
-          '<div class="empty-message">',
           'Nenhum hotel encontrado com este nome.',
           '</div>'
         ].join('\n'),
-        //"icon-search","icon-suitcase","icon-location2"
         suggestion: Handlebars.compile('<p class="icon-suitcase">&nbsp;<strong>{{hotel}}</strong> – {{cidade}}</p>')
       }
-    }*/
+    },
+    {
+      name: 'places',
+      displayKey: 'cidade',
+      source: places.ttAdapter(),
+      templates: {
+        empty: [
+          '<div class="empty-message">',
+          'Nenhum local encontrado com este nome.',
+          '</div>'
+        ].join('\n'),
+        //"icon-search","icon-suitcase","icon-location2"
+        suggestion: Handlebars.compile('<p class="icon-location2">&nbsp;<strong>{{cidade}}</strong> – Brasil</p>')
+      }
+    }
     ).on('typeahead:selected', function (obj, data) {
-        //console.log(data);
-        $("#destinyType").val('1');
+        var type = (data.type != undefined) ? data.type : 1; //tipo de pesquisa
+        $("#destinyType").val(type);
         $("#destinyId").val(data.id);
     });
   }
@@ -145,6 +158,45 @@ angular.module("hotelSearch")
   $scope.goSearch = function(params){
     console.log(params);
 
+    if(params.destinyId != "" && params.destinyType != ""){
+        
+        var items = [
+          {
+            id:1,
+            img:"http://localhost:12345/img/places/hotel1.jpeg",
+            name:"Mercatto Casa Hotel",
+            value: 259.98
+          },
+          {
+            id:2,
+            img:"http://localhost:12345/img/places/hotel2.jpeg",
+            name:"Boulevard Higienopolis Residence Hotel",
+            value: 199.00
+          },
+          {
+            id:3,
+            img:"http://localhost:12345/img/places/hotel3.jpeg",
+            name:"Lucca Hotel Pousada",
+            value: 135.50
+          }
+        ];
+
+        $scope.showResultView(items); //mostra a tela resultados
+    }
+    else{
+        alert('Selecione um destino!');
+    }
   }
+
+  $scope.buyThis = function(item){
+    alert('comprado!');
+  }
+
+
+  $scope.goNewSearch = function(){
+    //limpa a busca e joga pra main
+    $scope.showMainView();
+  }
+
 
 }); //end widget ctrl

@@ -2,10 +2,17 @@ var express        = require('express');
 var morgan         = require('morgan');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
+var redis		   = require('redis');
+var rdsclient 	   = redis.createClient(49153, '192.168.99.100', {}); //redis port,host,options	
 var app            = express();
 var places 		   = require('./routes/places');
 var hotels 		   = require('./routes/hotels');
 
+rdsclient.select(1, function() { /* ... */ });
+
+rdsclient.on("error", function (err) {
+    console.log(err);
+});
 
 app.use(morgan('dev'));  //
 app.use(bodyParser.urlencoded({ extended: false }));

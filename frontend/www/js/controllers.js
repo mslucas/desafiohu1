@@ -75,7 +75,7 @@ angular.module("hotelSearch")
       templates: {
         empty: [
           '<div class="empty-message">',
-          'Nenhum hotel encontrado com este nome.',
+          'Nenhum local encontrado com este nome.',
           '</div>'
         ].join('\n'),
         suggestion: Handlebars.compile('<p class="icon-suitcase">&nbsp;<strong>{{hotel}}</strong> – {{cidade}}</p>')
@@ -86,11 +86,11 @@ angular.module("hotelSearch")
       displayKey: 'cidade',
       source: places.ttAdapter(),
       templates: {
-        empty: [
+        /*empty: [
           '<div class="empty-message">',
           'Nenhum local encontrado com este nome.',
           '</div>'
-        ].join('\n'),
+        ].join('\n'),*/
         //"icon-search","icon-suitcase","icon-location2"
         suggestion: Handlebars.compile('<p class="icon-location2">&nbsp;<strong>{{cidade}}</strong> – Brasil</p>')
       }

@@ -14,6 +14,15 @@ rdsclient.on("error", function (err) {
     console.log(err);
 });
 
+var term = 'p';
+
+rdsclient.zrangebylex("autoc-hotels", "["+term+"", "["+term+"\xff",
+  function (err, response) {                                       
+    if (err) throw err;                                            
+    console.log(response);                                                  
+  }                                                                
+); 
+
 app.use(morgan('dev'));  //
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
